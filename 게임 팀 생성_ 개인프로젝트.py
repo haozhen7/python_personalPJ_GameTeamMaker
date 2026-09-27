@@ -207,7 +207,7 @@ def main():
         print_team(2, team2_roles)
         print("\n=========================================")
 
-        answer = input("\n위 팀으로 진행하겠습니까? y / n : ").strip().lower() # lower?
+        answer = input("\n위 팀으로 진행하겠습니까? y / n : ").strip().lower() # lower > 입력값의 대소문자 구분없애는 함수
 
         if answer == "y":
             print("\n 팀 구성이 완료되었습니다 ")
