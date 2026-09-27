@@ -36,6 +36,7 @@
 # 결과를 받고 마음에 들지 않을 경우, 반복문 처음으로 continue. 
 
 import random # 먼저 파이썬 내장되어있는 랜덤함수를 사용할꺼니까 불러옴 ( 팀 뽑기, 인원뽑기 등등 )
+import itertools # 이 내장함수 역할? >>> 조합, 순열, 반복(Iteration) 작업을 효율적으로 처리해 주는 표준 라이브러리
 
 TIERS = { # 티어의 종류를 저장시켜 입력받을 수 있는 티어 종류 딕셔너리에 저장
     "아이언":1,
@@ -137,7 +138,6 @@ def assign_roles(team_players): ## 이 코드는 완전 이해안됨
 
 def generate_balanced_teams(players): 
     """평균 티어 점수가 같고, 라인이 모두 채워지는 팀 조합 생성"""
-    import itertools # 이 내장함수 역할? >>> 조합, 순열, 반복(Iteration) 작업을 효율적으로 처리해 주는 표준 라이브러리
 
     valid_team_pairings=[] # 성공적인 팀 조합을 저장할 빈 리스트 생성
 
@@ -178,15 +178,25 @@ def print_team(team_num, role_dict): # 팀출력 함수 : 팀 번호, 위 함수
 
 
 def main():
-    players = get_player_inputs()
+    while True:
+        players = get_player_inputs()
 
-    print("\n조건에 맞는 팀 조합 계산중...")
-    valid_pairings = generate_balanced_teams(players)
+        print("\n조건에 맞는 팀 조합 계산중...")
+        valid_pairings = generate_balanced_teams(players)
 
-    if not valid_pairings:
-        print("\n[오류] 입력한 값으로는 결과 출력이 불가능합니다.")
-        return
-    # 마음에 들 때 까지 무한반복 (n누르면 무작위 재생성)
+        if valid_pairings:
+            break
+
+
+        print("\n[오류] 조건에 부합한 팀을 구성하지 못했습니다")
+        ans2= input('다시 입력하시겠습니까? (y/n):\n') 
+        if ans2=="y":
+            continue
+        if ans2=="n":
+            print("\n 프로그램을 종료합니다")
+            return
+                
+        # 마음에 들 때 까지 무한반복 (n누르면 무작위 재생성)
     
     while True:
         # 조건에 맞ㄴㄴ 조합 중 무작위 1개 선택
